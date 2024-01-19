@@ -30,7 +30,7 @@ export const CalendarPage = () => {
       {(() => {
         switch (view) {
           case "WEEK":
-            return <WeekGrid data={makeWeekGridData(date)} />;
+            return <WeekGrid data={makeWeekGridData(date)} month={month} />;
           case "MONTH":
             return <MonthGrid data={makeMonthGridData(date)} month={month} />;
         }

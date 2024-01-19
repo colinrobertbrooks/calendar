@@ -18,13 +18,14 @@ export const MonthGrid = ({ data, month }: Props) => (
     {data.map((week, idx) => (
       <div key={idx} className="grid grid-cols-7 gap-2 mb-2 last:mb-0">
         {week.map((date) => {
-          const isSelectedMonth = date.getMonth() === month;
+          const isMonth = date.getMonth() === month;
+
           return (
             <div
               key={date.toUTCString()}
               className={`aspect-square border ${
-                isSelectedMonth
-                  ? "border-gray-400"
+                isMonth
+                  ? "border-gray-400 text-gray-800"
                   : "border-gray-200 text-gray-200"
               } p-2`}
             >
