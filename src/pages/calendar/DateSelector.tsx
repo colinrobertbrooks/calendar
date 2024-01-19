@@ -15,7 +15,9 @@ type Props = {
   setDate: (date: Date) => void;
 };
 
-// TODO(style): button group
+const btnClassName =
+  "py-1 px-2 inline-flex items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg text-sm font-medium focus:z-10 border border-gray-300 bg-white text-gray-800 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none";
+
 const DateSelector = ({ view, date, setDate }: Props) => {
   const handlePrevious = useCallback(() => {
     switch (view) {
@@ -42,12 +44,18 @@ const DateSelector = ({ view, date, setDate }: Props) => {
   }, [view, date, setDate]);
 
   return (
-    <div className="flex flex-row gap-2">
-      <button onClick={handlePrevious} title="Previous">
+    <div className="inline-flex rounded-lg">
+      <button
+        className={btnClassName}
+        onClick={handlePrevious}
+        title="Previous"
+      >
         <FaChevronLeft />
       </button>
-      <button onClick={handleToday}>Today</button>
-      <button onClick={handleNext} title="Next">
+      <button className={btnClassName} onClick={handleToday}>
+        Today
+      </button>
+      <button className={btnClassName} onClick={handleNext} title="Next">
         <FaChevronRight />
       </button>
     </div>
