@@ -15,7 +15,7 @@ export const CalendarPage = () => {
 
   const [date] = useState<Date>(getToday);
   const month = date.getMonth();
-  const year = date.getFullYear();
+  const fullYear = date.getFullYear();
 
   return (
     <div className="container h-screen mx-auto p-3">
@@ -23,7 +23,7 @@ export const CalendarPage = () => {
         <ViewToggle view={view} setView={setView} />
       </div>
       <div className="flex justify-between items-center mb-2">
-        <Heading monthName={getMonthName(month)} year={year} />
+        <Heading monthName={getMonthName(month)} fullYear={fullYear} />
       </div>
       {(() => {
         switch (view) {
