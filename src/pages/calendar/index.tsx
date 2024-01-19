@@ -9,11 +9,12 @@ import {
 import { WeekGrid, MonthGrid } from "./views";
 import Heading from "./Heading";
 import ViewToggle from "./ViewToggle";
+import DateSelector from "./DateSelector";
 
 export const CalendarPage = () => {
   const [view, setView] = useState<CalendarView>("WEEK");
 
-  const [date] = useState<Date>(getToday);
+  const [date, setDate] = useState<Date>(getToday);
   const month = date.getMonth();
   const fullYear = date.getFullYear();
 
@@ -24,6 +25,7 @@ export const CalendarPage = () => {
       </div>
       <div className="flex justify-between items-center mb-2">
         <Heading monthName={getMonthName(month)} fullYear={fullYear} />
+        <DateSelector view={view} date={date} setDate={setDate} />
       </div>
       {(() => {
         switch (view) {
