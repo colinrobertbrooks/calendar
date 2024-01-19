@@ -7,6 +7,7 @@ import {
   getCalendarMonth,
 } from "../../utils";
 import { WeekGrid, MonthGrid } from "./views";
+import Heading from "./Heading";
 import ViewToggle from "./ViewToggle";
 
 export const CalendarPage = () => {
@@ -17,15 +18,15 @@ export const CalendarPage = () => {
   const selectedYear = selectedDate.getFullYear();
 
   return (
-    <div className="container flex flex-col h-screen mx-auto p-3">
+    <div className="container h-screen mx-auto p-3">
       <div className="flex justify-center">
         <ViewToggle view={view} setView={setView} />
       </div>
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl mb-2">
-          <span className="fw-bold">{getMonthName(selectedMonth)}</span>{" "}
-          {selectedYear}
-        </h1>
+      <div className="flex justify-between items-center mb-2">
+        <Heading
+          selectedMonthName={getMonthName(selectedMonth)}
+          selectedYear={selectedYear}
+        />
       </div>
       {(() => {
         switch (view) {
@@ -38,8 +39,6 @@ export const CalendarPage = () => {
                 selectedMonth={selectedMonth}
               />
             );
-          default:
-            return null;
         }
       })()}
     </div>
