@@ -6,7 +6,7 @@ import {
 } from "./dates";
 
 // date can be any date within the week
-export const getCalendarWeek = (date: Date): Date[] => {
+export const makeWeekGridData = (date: Date): Date[] => {
   const week: Date[] = [];
   let currentDate = getStartOfWeek(date);
 
@@ -21,7 +21,7 @@ export const getCalendarWeek = (date: Date): Date[] => {
 };
 
 // date can be any date within the month
-export const getCalendarMonth = (date: Date): Date[][] => {
+export const makeMonthGridData = (date: Date): Date[][] => {
   const startDate = getStartOfWeek(getStartOfMonth(date));
   const endDate = getEndOfWeek(getEndOfMonth(date));
   const month: Date[][] = [];

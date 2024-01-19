@@ -2,11 +2,11 @@ import { DayOfWeek } from "../../../types";
 import { getEnumKeys, makeShort } from "../../../utils";
 
 type Props = {
-  month: Date[][];
-  selectedMonth: number;
+  data: Date[][];
+  month: number;
 };
 
-export const MonthGrid = ({ month, selectedMonth }: Props) => (
+export const MonthGrid = ({ data, month }: Props) => (
   <>
     <div className="grid grid-cols-7 gap-2">
       {getEnumKeys(DayOfWeek).map((dayOfWeek) => (
@@ -15,10 +15,10 @@ export const MonthGrid = ({ month, selectedMonth }: Props) => (
         </div>
       ))}
     </div>
-    {month.map((week, idx) => (
+    {data.map((week, idx) => (
       <div key={idx} className="grid grid-cols-7 gap-2 mb-2 last:mb-0">
         {week.map((date) => {
-          const isSelectedMonth = date.getMonth() === selectedMonth;
+          const isSelectedMonth = date.getMonth() === month;
           return (
             <div
               key={date.toUTCString()}

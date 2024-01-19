@@ -1,11 +1,11 @@
 type Props = {
-  selectedMonthName: string;
-  selectedYear: number;
+  monthName: string;
+  year: number;
 };
 
-const Heading = ({ selectedMonthName, selectedYear }: Props) => (
+const Heading = ({ monthName, year }: Props) => (
   <h1 className="text-3xl">
-    <span className="fw-bold">{selectedMonthName}</span> {selectedYear}
+    <span className="fw-bold">{monthName}</span> {year}
   </h1>
 );
 

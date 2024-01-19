@@ -1,13 +1,13 @@
 import { getDayOfWeekName } from "../../../utils";
 
 type Props = {
-  week: Date[];
+  data: Date[];
 };
 
 // TODO(style): fix overflow
-export const WeekGrid = ({ week }: Props) => (
+export const WeekGrid = ({ data }: Props) => (
   <div className="grid grid-cols-7 gap-2 h-full">
-    {week.map((date) => (
+    {data.map((date) => (
       <div key={date.toUTCString()}>
         <div className="text-center">
           {getDayOfWeekName(date.getDay(), true)} {date.getDate()}
