@@ -16,7 +16,7 @@ export const MonthGrid = ({ month, selectedMonth }: Props) => (
       ))}
     </div>
     {month.map((week, idx) => (
-      <div key={idx} className="grid grid-cols-7 gap-2 mb-2">
+      <div key={idx} className="grid grid-cols-7 gap-2 mb-2 last:mb-0">
         {week.map((date) => {
           const isSelectedMonth = date.getMonth() === selectedMonth;
           return (
