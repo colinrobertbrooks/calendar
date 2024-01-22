@@ -1,5 +1,6 @@
 import { DayOfWeek } from "../../../types";
 import { getEnumKeys, makeShort } from "../../../utils";
+import AddEventButton from "../AddEventButton";
 
 type Props = {
   data: Date[][];
@@ -23,13 +24,14 @@ export const MonthGrid = ({ data, month }: Props) => (
           return (
             <div
               key={date.toUTCString()}
-              className={`aspect-square border ${
+              className={`group aspect-square border ${
                 isMonth
                   ? "border-gray-400 text-gray-800"
                   : "border-gray-200 text-gray-200"
               } p-2`}
             >
               <div className="text-right">{date.getDate()}</div>
+              {isMonth && <AddEventButton />}
             </div>
           );
         })}

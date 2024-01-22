@@ -1,4 +1,5 @@
 import { getDayOfWeekName } from "../../../utils";
+import AddEventButton from "../AddEventButton";
 
 type Props = {
   data: Date[];
@@ -14,7 +15,7 @@ export const WeekGrid = ({ data, month }: Props) => (
       return (
         <div
           key={date.toUTCString()}
-          className={isMonth ? "text-gray-800" : "text-gray-200"}
+          className={`group ${isMonth ? "text-gray-800" : "text-gray-200"}`}
         >
           <div className="text-center">
             {getDayOfWeekName(date.getDay(), true)} {date.getDate()}
@@ -23,7 +24,9 @@ export const WeekGrid = ({ data, month }: Props) => (
             className={`h-full border ${
               isMonth ? "border-gray-400" : "border-gray-200"
             } p-2`}
-          />
+          >
+            {isMonth && <AddEventButton />}
+          </div>
         </div>
       );
     })}
