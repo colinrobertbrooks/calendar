@@ -8,20 +8,22 @@ type Props = {
 
 // TODO(style): fix overflow
 export const WeekGrid = ({ data, month }: Props) => (
-  <div className="grid grid-cols-7 gap-2 h-full">
+  <div className="flex-1 grid grid-cols-7 gap-2">
     {data.map((date) => {
       const isMonth = date.getMonth() === month;
 
       return (
         <div
           key={date.toUTCString()}
-          className={`group ${isMonth ? "text-gray-800" : "text-gray-200"}`}
+          className={`flex flex-col group ${
+            isMonth ? "text-gray-800" : "text-gray-200"
+          }`}
         >
           <div className="text-center">
             {getDayOfWeekName(date.getDay(), true)} {date.getDate()}
           </div>
           <div
-            className={`h-full border ${
+            className={`flex-1 border ${
               isMonth ? "border-gray-400" : "border-gray-200"
             } p-2`}
           >
