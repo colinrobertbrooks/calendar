@@ -27,7 +27,7 @@ export const WeekGrid = ({ data, month }: Props) => (
               isMonth ? "border-gray-400" : "border-gray-200"
             } p-2`}
           >
-            {isMonth && <AddEventButton />}
+            {isMonth && <AddEventButton date={date} />}
           </div>
         </div>
       );

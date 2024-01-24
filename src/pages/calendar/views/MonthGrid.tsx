@@ -31,7 +31,7 @@ export const MonthGrid = ({ data, month }: Props) => (
               } p-2`}
             >
               <div className="text-right">{date.getDate()}</div>
-              {isMonth && <AddEventButton />}
+              {isMonth && <AddEventButton date={date} />}
             </div>
           );
         })}
