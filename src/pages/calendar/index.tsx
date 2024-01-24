@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import { CalendarView } from "../../types";
 import {
   getToday,
@@ -19,22 +20,25 @@ export const CalendarPage = () => {
   const fullYear = date.getFullYear();
 
   return (
-    <div className="container h-screen mx-auto p-3">
-      <div className="flex justify-center">
-        <ViewToggle view={view} setView={setView} />
+    <>
+      <div className="container h-screen mx-auto p-3">
+        <div className="flex justify-center">
+          <ViewToggle view={view} setView={setView} />
+        </div>
+        <div className="flex justify-between items-center mb-2">
+          <Heading monthName={getMonthName(month)} fullYear={fullYear} />
+          <DateSelector view={view} date={date} setDate={setDate} />
+        </div>
+        {(() => {
+          switch (view) {
+            case "WEEK":
+              return <WeekGrid data={makeWeekGridData(date)} month={month} />;
+            case "MONTH":
+              return <MonthGrid data={makeMonthGridData(date)} month={month} />;
+          }
+        })()}
       </div>
-      <div className="flex justify-between items-center mb-2">
-        <Heading monthName={getMonthName(month)} fullYear={fullYear} />
-        <DateSelector view={view} date={date} setDate={setDate} />
-      </div>
-      {(() => {
-        switch (view) {
-          case "WEEK":
-            return <WeekGrid data={makeWeekGridData(date)} month={month} />;
-          case "MONTH":
-            return <MonthGrid data={makeMonthGridData(date)} month={month} />;
-        }
-      })()}
-    </div>
+      <Outlet />
+    </>
   );
 };
