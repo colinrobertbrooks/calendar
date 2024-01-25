@@ -83,7 +83,7 @@ export const AddEventPage = () => {
         <div className="flex gap-2">
           <button
             className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-2 border border-gray-400 rounded disabled:opacity-50"
-            disabled={!eventDate || !eventName}
+            disabled={!eventDate || !eventDuration || !eventName}
             onClick={handleSubmit}
           >
             Save
