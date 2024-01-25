@@ -29,7 +29,7 @@ export const AddEventPage = () => {
   const { addEvent } = useEventsContext();
   const handleSubmit = () => {
     const date = new Date(eventDate);
-    addEvent({ date: date.toISOString(), name: eventName });
+    addEvent({ date, name: eventName });
     navigate(`/?dt=${toISOStringShort(date)}`);
   };
 

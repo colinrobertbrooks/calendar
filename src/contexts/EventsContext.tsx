@@ -2,7 +2,10 @@ import React, { createContext, useContext } from "react";
 import { Event } from "../types";
 import { useLocalStorage } from "../hooks";
 
-type AddEventPayload = Pick<Event, "date" | "name">;
+type AddEventPayload = {
+  date: Date;
+  name: string;
+};
 
 type EventsContextValue = {
   addEvent: (payload: AddEventPayload) => void;
@@ -19,12 +22,13 @@ export const EventsProvider = ({
 }) => {
   const [events, setEvents] = useLocalStorage<Event[]>("EVENTS", []);
 
-  const addEvent = (payload: AddEventPayload) =>
+  const addEvent = ({ date, name }: AddEventPayload) =>
     setEvents((existingEvents) => [
       ...existingEvents,
       {
         id: new Date().getTime(),
-        ...payload,
+        date: date.toISOString(),
+        name,
       },
     ]);
 
