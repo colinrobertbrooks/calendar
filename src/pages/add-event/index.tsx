@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEventsContext, useParamsContext } from "../../contexts";
 import { useDialog } from "../../hooks";
 import { toDateParam } from "../../utils";
@@ -69,9 +69,9 @@ export const AddEventPage = () => {
           >
             Save
           </button>
-          <Link className="py-1 px-2" to="/">
+          <button className="py-1 px-2" onClick={() => navigate(-1)}>
             Cancel
-          </Link>
+          </button>
         </div>
       </div>
     </dialog>
