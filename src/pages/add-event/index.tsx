@@ -4,6 +4,9 @@ import { useEventsContext, useParamsContext } from "../../contexts";
 import { useDialog } from "../../hooks";
 import { toDateParam } from "../../utils";
 
+const inputClassName =
+  "border rounded w-full py-2 px-3 text-gray-700 leading-tight";
+
 export const AddEventPage = () => {
   /*
    *  router & params
@@ -24,12 +27,13 @@ export const AddEventPage = () => {
   /*
    *  event form
    */
-  const [eventDate, setEventDate] = useState(`${dateParam}T00:00`);
-  const [eventName, setEventName] = useState("");
+  const [eventDate, setEventDate] = useState<string>(`${dateParam}T00:00`);
+  const [eventDuration, setEventDuration] = useState<number>(0);
+  const [eventName, setEventName] = useState<string>("");
   const { addEvent } = useEventsContext();
   const handleSubmit = () => {
     const date = new Date(eventDate);
-    addEvent({ date, name: eventName });
+    addEvent({ date, duration: eventDuration, name: eventName });
     navigate(`/?date=${toDateParam(date)}&view=${viewParam}`);
   };
 
@@ -45,16 +49,31 @@ export const AddEventPage = () => {
           <label htmlFor="event-date">Date</label>
           <input
             aria-label="Select event date and time"
-            className="border rounded w-full py-2 px-3 text-gray-700 leading-tight"
+            className={inputClassName}
             id="event-date"
             type="datetime-local"
             value={eventDate}
             onChange={(event) => setEventDate(event.target.value)}
           />
+          <label htmlFor="event-duration">Duration</label>
+          <select
+            className={inputClassName}
+            id="event-duration"
+            value={eventDuration}
+            onChange={(event) => setEventDuration(Number(event.target.value))}
+          >
+            <option value="0" disabled>
+              Select duration...
+            </option>
+            <option value="900">15 minutes</option>
+            <option value="1800">30 minutes</option>
+            <option value="2700">45 minutes</option>
+            <option value="3600">60 minutes</option>
+          </select>
           <label htmlFor="event-name">Name</label>
           <input
             aria-label="Enter event name"
-            className="border rounded w-full py-2 px-3 text-gray-700 leading-tight"
+            className={inputClassName}
             id="event-name"
             type="text"
             value={eventName}

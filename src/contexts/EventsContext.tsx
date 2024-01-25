@@ -4,6 +4,7 @@ import { useLocalStorage } from "../hooks";
 
 type AddEventPayload = {
   date: Date;
+  duration: number; // seconds
   name: string;
 };
 
@@ -22,12 +23,13 @@ export const EventsProvider = ({
 }) => {
   const [events, setEvents] = useLocalStorage<Event[]>("EVENTS", []);
 
-  const addEvent = ({ date, name }: AddEventPayload) =>
+  const addEvent = ({ date, duration, name }: AddEventPayload) =>
     setEvents((existingEvents) => [
       ...existingEvents,
       {
         id: new Date().getTime(),
         date: date.toISOString(),
+        duration,
         name,
       },
     ]);
