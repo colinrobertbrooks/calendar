@@ -1,21 +1,24 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { CalendarView } from "../../types";
+import { useParamsContext } from "../../contexts";
 import {
   getToday,
   getMonthName,
   makeWeekGridData,
   makeMonthGridData,
+  toDate,
+  fromDateParam,
 } from "../../utils";
 import { WeekGrid, MonthGrid } from "./views";
 import Heading from "./Heading";
 import ViewToggle from "./ViewToggle";
 import DateSelector from "./DateSelector";
+import { MONTH_VIEW, WEEK_VIEW } from "../../constants";
 
 export const CalendarPage = () => {
-  const [view, setView] = useState<CalendarView>("WEEK");
+  const { dateParam, viewParam } = useParamsContext();
 
-  const [date, setDate] = useState<Date>(getToday);
+  const date = fromDateParam(dateParam);
   const month = date.getMonth();
   const fullYear = date.getFullYear();
 
@@ -23,17 +26,17 @@ export const CalendarPage = () => {
     <>
       <div className="container flex flex-col h-screen mx-auto p-3">
         <div className="flex justify-center">
-          <ViewToggle view={view} setView={setView} />
+          <ViewToggle />
         </div>
         <div className="flex justify-between items-center mb-2">
           <Heading monthName={getMonthName(month)} fullYear={fullYear} />
-          <DateSelector view={view} date={date} setDate={setDate} />
+          <DateSelector />
         </div>
         {(() => {
-          switch (view) {
-            case "WEEK":
+          switch (viewParam) {
+            case WEEK_VIEW:
               return <WeekGrid data={makeWeekGridData(date)} month={month} />;
-            case "MONTH":
+            case MONTH_VIEW:
               return <MonthGrid data={makeMonthGridData(date)} month={month} />;
           }
         })()}

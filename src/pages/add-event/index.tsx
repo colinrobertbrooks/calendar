@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
-import { useEventsContext } from "../../contexts";
+import { Link, useNavigate } from "react-router-dom";
+import { useEventsContext, useParamsContext } from "../../contexts";
 import { useDialog } from "../../hooks";
-import { toISOStringShort } from "../../utils";
+import { toDateParam } from "../../utils";
 
 export const AddEventPage = () => {
   /*
-   *  router
+   *  router & params
    */
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { dateParam, viewParam } = useParamsContext();
 
   /*
    *  dialog
@@ -24,13 +24,13 @@ export const AddEventPage = () => {
   /*
    *  event form
    */
-  const [eventDate, setEventDate] = useState(`${searchParams.get("dt")}T00:00`);
+  const [eventDate, setEventDate] = useState(`${dateParam}T00:00`);
   const [eventName, setEventName] = useState("");
   const { addEvent } = useEventsContext();
   const handleSubmit = () => {
     const date = new Date(eventDate);
     addEvent({ date, name: eventName });
-    navigate(`/?dt=${toISOStringShort(date)}`);
+    navigate(`/?date=${toDateParam(date)}&view=${viewParam}`);
   };
 
   return (

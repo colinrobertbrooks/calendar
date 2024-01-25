@@ -56,9 +56,3 @@ export const getDayOfWeekName = (
   if (short) return name.substring(0, 3);
   return name;
 };
-
-/*
- *  iso
- */
-export const toISOStringShort = (date: Date) =>
-  new Date(date).toISOString().slice(0, 10); // YYYY-MM-DD

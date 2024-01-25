@@ -1,47 +1,44 @@
 import { useCallback } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
-import { CalendarView } from "../../types";
+import { MONTH_VIEW, WEEK_VIEW } from "../../constants";
 import {
   getToday,
   getPreviousWeek,
   getNextWeek,
   getPreviousMonth,
   getNextMonth,
+  toDateParam,
+  fromDateParam,
 } from "../../utils";
-
-type Props = {
-  view: CalendarView;
-  date: Date;
-  setDate: (date: Date) => void;
-};
+import { useParamsContext } from "../../contexts";
 
 const btnClassName =
   "py-1 px-2 inline-flex items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg text-sm font-medium focus:z-10 border border-gray-300 bg-white text-gray-800 hover:bg-gray-50";
 
-const DateSelector = ({ view, date, setDate }: Props) => {
-  const handlePrevious = useCallback(() => {
-    switch (view) {
-      case "WEEK":
-        setDate(getPreviousWeek(date));
-        break;
-      case "MONTH":
-        setDate(getPreviousMonth(date));
-        break;
-    }
-  }, [view, date, setDate]);
+const DateSelector = () => {
+  const { dateParam, setDateParam, viewParam } = useParamsContext();
+  const date = fromDateParam(dateParam);
+  const setDate = (nextDate: Date) => setDateParam(toDateParam(nextDate));
 
-  const handleToday = () => setDate(getToday());
+  const handlePrevious = useCallback(() => {
+    switch (viewParam) {
+      case WEEK_VIEW:
+        return setDate(getPreviousWeek(date));
+      case MONTH_VIEW:
+        return setDate(getPreviousMonth(date));
+    }
+  }, [viewParam, date, setDate]);
+
+  const handleToday = () => setDateParam(toDateParam(getToday()));
 
   const handleNext = useCallback(() => {
-    switch (view) {
-      case "WEEK":
-        setDate(getNextWeek(date));
-        break;
-      case "MONTH":
-        setDate(getNextMonth(date));
-        break;
+    switch (viewParam) {
+      case WEEK_VIEW:
+        return setDate(getNextWeek(date));
+      case MONTH_VIEW:
+        return setDate(getNextMonth(date));
     }
-  }, [view, date, setDate]);
+  }, [viewParam, date, setDate]);
 
   return (
     <div className="inline-flex rounded-lg">
