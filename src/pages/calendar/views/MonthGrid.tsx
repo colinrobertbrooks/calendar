@@ -1,6 +1,7 @@
 import { DayOfWeek } from "../../../types";
 import { getEnumKeys, makeShort } from "../../../utils";
 import AddEventButton from "../AddEventButton";
+import Events from "../Events";
 
 type Props = {
   data: Date[][];
@@ -31,7 +32,12 @@ export const MonthGrid = ({ data, month }: Props) => (
               } p-2`}
             >
               <div className="text-right">{date.getDate()}</div>
-              {isMonth && <AddEventButton date={date} />}
+              {isMonth && (
+                <>
+                  <Events date={date} />
+                  <AddEventButton date={date} />
+                </>
+              )}
             </div>
           );
         })}

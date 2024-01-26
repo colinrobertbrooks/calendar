@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from "react";
 import { Event } from "../types";
 import { useLocalStorage } from "../hooks";
+import { isSameDate } from "../utils";
 
 type AddEventPayload = {
   date: Date;
@@ -10,6 +11,7 @@ type AddEventPayload = {
 
 type EventsContextValue = {
   addEvent: (payload: AddEventPayload) => void;
+  getEvents: (date: Date) => Event[];
 };
 
 const EventsContext = createContext<EventsContextValue>(
@@ -34,10 +36,13 @@ export const EventsProvider = ({
       },
     ]);
 
-  console.log({ events }); // WIP
+  const getEvents = (date: Date): Event[] =>
+    events
+      .filter((event) => isSameDate(date, new Date(event.date)))
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   return (
-    <EventsContext.Provider value={{ addEvent }}>
+    <EventsContext.Provider value={{ addEvent, getEvents }}>
       {children}
     </EventsContext.Provider>
   );

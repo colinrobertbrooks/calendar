@@ -1,12 +1,12 @@
 import { getDayOfWeekName } from "../../../utils";
 import AddEventButton from "../AddEventButton";
+import Events from "../Events";
 
 type Props = {
   data: Date[];
   month: number;
 };
 
-// TODO(style): fix overflow
 export const WeekGrid = ({ data, month }: Props) => (
   <div className="flex-1 grid grid-cols-7 gap-2">
     {data.map((date) => {
@@ -27,7 +27,12 @@ export const WeekGrid = ({ data, month }: Props) => (
               isMonth ? "border-gray-400" : "border-gray-200"
             } p-2`}
           >
-            {isMonth && <AddEventButton date={date} />}
+            {isMonth && (
+              <>
+                <Events date={date} />
+                <AddEventButton date={date} />
+              </>
+            )}
           </div>
         </div>
       );
