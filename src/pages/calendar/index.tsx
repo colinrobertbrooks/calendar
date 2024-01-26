@@ -1,12 +1,9 @@
-import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useParamsContext } from "../../contexts";
 import {
-  getToday,
   getMonthName,
   makeWeekGridData,
   makeMonthGridData,
-  toDate,
   fromDateParam,
 } from "../../utils";
 import { WeekGrid, MonthGrid } from "./views";
@@ -17,7 +14,6 @@ import { MONTH_VIEW, WEEK_VIEW } from "../../constants";
 
 export const CalendarPage = () => {
   const { dateParam, viewParam } = useParamsContext();
-
   const date = fromDateParam(dateParam);
   const month = date.getMonth();
   const fullYear = date.getFullYear();
@@ -34,10 +30,10 @@ export const CalendarPage = () => {
         </div>
         {(() => {
           switch (viewParam) {
-            case WEEK_VIEW:
-              return <WeekGrid data={makeWeekGridData(date)} month={month} />;
             case MONTH_VIEW:
               return <MonthGrid data={makeMonthGridData(date)} month={month} />;
+            case WEEK_VIEW:
+              return <WeekGrid data={makeWeekGridData(date)} month={month} />;
           }
         })()}
       </div>
