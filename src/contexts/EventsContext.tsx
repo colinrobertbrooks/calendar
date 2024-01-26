@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react";
-import { Event } from "../types";
 import { useLocalStorage } from "../hooks";
+import { Event } from "../types";
 import { isSameDate } from "../utils";
 
 type AddEventPayload = {
