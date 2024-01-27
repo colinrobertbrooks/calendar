@@ -1,3 +1,4 @@
+import { WEEK_VIEW } from "../../../constants";
 import { getDayOfWeekName } from "../../../utils";
 import AddEventButton from "../AddEventButton";
 import Events from "../Events";
@@ -29,7 +30,7 @@ export const WeekGrid = ({ data, month }: Props) => (
           >
             {isMonth && (
               <>
-                <Events date={date} />
+                <Events date={date} view={WEEK_VIEW} />
                 <AddEventButton date={date} />
               </>
             )}

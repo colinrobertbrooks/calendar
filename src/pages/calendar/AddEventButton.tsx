@@ -12,7 +12,7 @@ const btnVisibilityClassName =
   "sr-only group-hover:not-sr-only focus:not-sr-only";
 
 const btnStylesClassName =
-  "flex !py-1 !px-2 rounded-lg text-sm font-medium focus:z-10 border border-gray-300 bg-white text-gray-800 hover:bg-gray-50";
+  "flex !px-2.5 !py-0.5 rounded text-sm text-gray-800 border border-gray-300 hover:bg-gray-50";
 
 const AddEventButton = ({ date }: Props) => {
   const { viewParam } = useParamsContext();

@@ -1,3 +1,4 @@
+import { MONTH_VIEW } from "../../../constants";
 import { DayOfWeek } from "../../../types";
 import { getEnumKeys, makeShort } from "../../../utils";
 import AddEventButton from "../AddEventButton";
@@ -34,7 +35,7 @@ export const MonthGrid = ({ data, month }: Props) => (
               <div className="text-right">{date.getDate()}</div>
               {isMonth && (
                 <>
-                  <Events date={date} />
+                  <Events date={date} view={MONTH_VIEW} />
                   <AddEventButton date={date} />
                 </>
               )}
