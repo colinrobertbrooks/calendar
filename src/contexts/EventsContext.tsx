@@ -23,8 +23,8 @@ export const EventsProvider = ({
   );
 
   const addEvent = (payload: AddEventPayload) =>
-    setEventRecord((records) => [
-      ...records,
+    setEventRecord((prevEventRecords) => [
+      ...prevEventRecords,
       serializeEvent({
         id: new Date().getTime(),
         ...payload,
