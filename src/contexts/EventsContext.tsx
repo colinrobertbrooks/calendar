@@ -1,13 +1,7 @@
 import React, { createContext, useContext } from "react";
 import { useLocalStorage } from "../hooks";
-import { Event } from "../types";
-import { isSameDate } from "../utils";
-
-type AddEventPayload = {
-  date: Date;
-  duration: number; // seconds
-  name: string;
-};
+import { Event, EventRecord, AddEventPayload } from "../types";
+import { deserializeEventRecord, isSameDate, serializeEvent } from "../utils";
 
 type EventsContextValue = {
   addEvent: (payload: AddEventPayload) => void;
@@ -23,21 +17,23 @@ export const EventsProvider = ({
 }: {
   children: React.ReactElement;
 }) => {
-  const [events, setEvents] = useLocalStorage<Event[]>("EVENTS", []);
+  const [eventRecords, setEventRecord] = useLocalStorage<EventRecord[]>(
+    "EVENT_RECORDS",
+    []
+  );
 
-  const addEvent = ({ date, duration, name }: AddEventPayload) =>
-    setEvents((existingEvents) => [
-      ...existingEvents,
-      {
+  const addEvent = (payload: AddEventPayload) =>
+    setEventRecord((records) => [
+      ...records,
+      serializeEvent({
         id: new Date().getTime(),
-        date: date.toISOString(),
-        duration,
-        name,
-      },
+        ...payload,
+      }),
     ]);
 
   const getEvents = (date: Date): Event[] =>
-    events
+    eventRecords
+      .map(deserializeEventRecord)
       .filter((event) => isSameDate(date, new Date(event.date)))
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
