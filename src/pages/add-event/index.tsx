@@ -30,11 +30,26 @@ export const AddEventPage = () => {
   const [eventDate, setEventDate] = useState<string>(`${dateParam}T00:00`);
   const [eventDuration, setEventDuration] = useState<number>(0);
   const [eventName, setEventName] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const { addEvent } = useEventsContext();
   const handleSubmit = () => {
     const date = new Date(eventDate);
-    addEvent({ date, duration: eventDuration, name: eventName });
-    navigate(`/?date=${toDateParam(date)}&view=${viewParam}`);
+    try {
+      setErrorMessage("");
+      addEvent({ date, duration: eventDuration, name: eventName });
+      navigate(`/?date=${toDateParam(date)}&view=${viewParam}`);
+    } catch (error) {
+      if (
+        error &&
+        typeof error === "object" &&
+        "message" in error &&
+        typeof error.message === "string"
+      ) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage("Unable to add new event.");
+      }
+    }
   };
 
   return (
@@ -80,6 +95,7 @@ export const AddEventPage = () => {
             onChange={(event) => setEventName(event.target.value)}
           />
         </div>
+        {errorMessage && <p className="text-red-500 mb-2">{errorMessage}</p>}
         <div className="flex gap-2">
           <button
             className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-2 border border-gray-400 rounded disabled:opacity-50"
