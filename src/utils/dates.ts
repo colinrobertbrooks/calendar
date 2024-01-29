@@ -10,6 +10,12 @@ export const getToday = (): Date => {
 };
 
 /*
+ *  seconds
+ */
+export const addSeconds = (date: Date, seconds: number): Date =>
+  new Date(date.getTime() + seconds * 1000);
+
+/*
  *  date
  */
 export const isSameDate = (d1: Date, d2: Date): boolean =>
