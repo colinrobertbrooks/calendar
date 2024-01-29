@@ -32,6 +32,8 @@ export const EventsProvider = ({
       id: new Date().getTime(),
       ...payload,
     };
+
+    // check for overlap
     const newEventStart = newEvent.date.getTime();
     const newEventEnd = addSeconds(newEvent.date, newEvent.duration).getTime();
     const overlapExists = eventRecords.some((eventRecord) => {
