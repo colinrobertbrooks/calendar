@@ -1,4 +1,4 @@
-# Ramp Prep Calendar
+# Calendar
 
 ## Setup
 
