@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
-import { MONTH_VIEW, WEEK_VIEW } from "../../constants";
+import { MONTH_VIEW, SCREEN_LG, WEEK_VIEW } from "../../constants";
 import { useParamsContext } from "../../contexts";
+import { useWindowSize } from "../../hooks";
 import {
   getMonthName,
   makeWeekGridData,
@@ -13,10 +14,19 @@ import ViewToggle from "./ViewToggle";
 import DateSelector from "./DateSelector";
 
 export const CalendarPage = () => {
+  // screen size
+  const { width: windowWidth } = useWindowSize();
+
+  // params
   const { dateParam, viewParam } = useParamsContext();
   const date = fromDateParam(dateParam);
   const month = date.getMonth();
+  const monthName = getMonthName(month);
   const fullYear = date.getFullYear();
+
+  if (windowWidth < SCREEN_LG) {
+    return <>TODO</>;
+  }
 
   return (
     <>
@@ -25,7 +35,7 @@ export const CalendarPage = () => {
           <ViewToggle />
         </div>
         <div className="flex justify-between items-center mb-2">
-          <Heading monthName={getMonthName(month)} fullYear={fullYear} />
+          <Heading monthName={monthName} fullYear={fullYear} />
           <DateSelector />
         </div>
         {(() => {
