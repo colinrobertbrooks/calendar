@@ -1,3 +1,2 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getEnumKeys = (enumObj: any): string[] =>
+export const getEnumKeys = <T extends object>(enumObj: T): string[] =>
   Object.keys(enumObj).filter((key) => isNaN(Number(key)));

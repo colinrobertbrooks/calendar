@@ -1,5 +1,7 @@
 # Calendar
 
+A React calendar application with events persisted in local storage.
+
 ## Setup
 
 ```sh
