@@ -13,6 +13,7 @@ export const AddEventPage = () => {
    */
   const navigate = useNavigate();
   const { dateParam, viewParam } = useParamsContext();
+  const navigateBack = () => navigate(-1);
 
   /*
    *  dialog
@@ -53,11 +54,7 @@ export const AddEventPage = () => {
   };
 
   return (
-    <dialog
-      className="p-6 rounded-xl"
-      onCancel={(event) => event.preventDefault()}
-      ref={dialogRef}
-    >
+    <dialog className="p-6 rounded-xl" onCancel={navigateBack} ref={dialogRef}>
       <div className="w-full">
         <h1 className="text-xl">Add Event</h1>
         <div className="grid gap-2 my-3">
@@ -104,7 +101,7 @@ export const AddEventPage = () => {
           >
             Save
           </button>
-          <button className="py-1 px-2" onClick={() => navigate(-1)}>
+          <button className="py-1 px-2" onClick={navigateBack}>
             Cancel
           </button>
         </div>
