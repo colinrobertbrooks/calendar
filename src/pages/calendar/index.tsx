@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { MONTH_VIEW, SCREEN_LG, WEEK_VIEW } from "../../constants";
+import { MONTH_VIEW, SCREEN_XL, WEEK_VIEW } from "../../constants";
 import { useParamsContext } from "../../contexts";
 import { useWindowSize } from "../../hooks";
 import {
@@ -15,7 +15,7 @@ import DateSelector from "./DateSelector";
 
 export const CalendarPage = () => {
   // screen size
-  const { width: windowWidth } = useWindowSize();
+  const screen = useWindowSize();
 
   // params
   const { dateParam, viewParam } = useParamsContext();
@@ -24,8 +24,13 @@ export const CalendarPage = () => {
   const monthName = getMonthName(month);
   const fullYear = date.getFullYear();
 
-  if (windowWidth < SCREEN_LG) {
-    return <>TODO</>;
+  if (screen.width < SCREEN_XL) {
+    return (
+      <>
+        TODO
+        <Outlet />
+      </>
+    );
   }
 
   return (
