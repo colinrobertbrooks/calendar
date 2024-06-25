@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import { MONTH_VIEW, SCREEN_XL, WEEK_VIEW } from "../../constants";
+import { MONTH_VIEW, WEEK_VIEW } from "../../constants";
 import { useParamsContext } from "../../contexts";
-import { useWindowSize } from "../../hooks";
+import { useScreen } from "../../hooks";
 import {
   getMonthName,
   makeWeekGridData,
@@ -14,8 +14,8 @@ import ViewToggle from "./ViewToggle";
 import DateSelector from "./DateSelector";
 
 export const CalendarPage = () => {
-  // screen size
-  const screen = useWindowSize();
+  // screen
+  const screen = useScreen();
 
   // params
   const { dateParam, viewParam } = useParamsContext();
@@ -24,10 +24,28 @@ export const CalendarPage = () => {
   const monthName = getMonthName(month);
   const fullYear = date.getFullYear();
 
-  if (screen.width < SCREEN_XL) {
+  if (screen.isXl) {
     return (
       <>
-        TODO
+        <div className="container flex flex-col h-screen mx-auto p-3">
+          <div className="flex justify-center">
+            <ViewToggle />
+          </div>
+          <div className="flex justify-between items-center mb-2">
+            <Heading monthName={monthName} fullYear={fullYear} />
+            <DateSelector />
+          </div>
+          {(() => {
+            switch (viewParam) {
+              case MONTH_VIEW:
+                return (
+                  <MonthGrid data={makeMonthGridData(date)} month={month} />
+                );
+              case WEEK_VIEW:
+                return <WeekGrid data={makeWeekGridData(date)} month={month} />;
+            }
+          })()}
+        </div>
         <Outlet />
       </>
     );
@@ -35,23 +53,7 @@ export const CalendarPage = () => {
 
   return (
     <>
-      <div className="container flex flex-col h-screen mx-auto p-3">
-        <div className="flex justify-center">
-          <ViewToggle />
-        </div>
-        <div className="flex justify-between items-center mb-2">
-          <Heading monthName={monthName} fullYear={fullYear} />
-          <DateSelector />
-        </div>
-        {(() => {
-          switch (viewParam) {
-            case MONTH_VIEW:
-              return <MonthGrid data={makeMonthGridData(date)} month={month} />;
-            case WEEK_VIEW:
-              return <WeekGrid data={makeWeekGridData(date)} month={month} />;
-          }
-        })()}
-      </div>
+      TODO
       <Outlet />
     </>
   );
