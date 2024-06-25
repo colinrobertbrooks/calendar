@@ -18,6 +18,9 @@ export const addSeconds = (date: Date, seconds: number): Date =>
 /*
  *  date
  */
+export const getNextDate = (date: Date): Date =>
+  new Date(new Date(date).setDate(date.getDate() + 1));
+
 export const isSameDate = (d1: Date, d2: Date): boolean =>
   d1.getFullYear() === d2.getFullYear() &&
   d1.getMonth() === d2.getMonth() &&
@@ -58,6 +61,9 @@ export const getMonthName = (month: Month, short?: boolean): string => {
   if (short) return name.substring(0, 3);
   return name;
 };
+
+export const getDaysInMonth = (date: Date): number =>
+  getEndOfMonth(date).getDate();
 
 /*
  *  day of week

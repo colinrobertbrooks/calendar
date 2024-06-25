@@ -6,9 +6,10 @@ import {
   getMonthName,
   makeWeekGridData,
   makeMonthGridData,
+  makeListGridData,
   fromDateParam,
 } from "../../utils";
-import { WeekGrid, MonthGrid } from "./views";
+import { MonthGrid, WeekGrid, ListGrid } from "./views";
 import Heading from "./Heading";
 import ViewToggle from "./ViewToggle";
 import DateSelector from "./DateSelector";
@@ -37,12 +38,16 @@ export const CalendarPage = () => {
           </div>
           {(() => {
             switch (viewParam) {
-              case MONTH_VIEW:
-                return (
-                  <MonthGrid data={makeMonthGridData(date)} month={month} />
-                );
+              case MONTH_VIEW: {
+                const data = makeMonthGridData(date);
+                return <MonthGrid data={data} month={month} />;
+              }
+
               case WEEK_VIEW:
-                return <WeekGrid data={makeWeekGridData(date)} month={month} />;
+              default: {
+                const data = makeWeekGridData(date);
+                return <WeekGrid data={data} month={month} />;
+              }
             }
           })()}
         </div>
@@ -53,7 +58,7 @@ export const CalendarPage = () => {
 
   return (
     <>
-      TODO
+      <ListGrid data={makeListGridData(date, viewParam)} />
       <Outlet />
     </>
   );
