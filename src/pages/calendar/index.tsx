@@ -10,10 +10,9 @@ import {
   fromDateParam,
 } from "../../utils";
 import { MonthGrid, WeekGrid, ListGrid } from "./views";
+import DateSelector from "./DateSelector";
 import Heading from "./Heading";
 import ViewToggle from "./ViewToggle";
-import DateSelector from "./DateSelector";
-
 export const CalendarPage = () => {
   // screen
   const screen = useScreen();
@@ -25,18 +24,18 @@ export const CalendarPage = () => {
   const monthName = getMonthName(month);
   const fullYear = date.getFullYear();
 
-  if (screen.isXl) {
-    return (
-      <>
-        <div className="container flex flex-col h-screen mx-auto p-3">
-          <div className="flex justify-center">
-            <ViewToggle />
-          </div>
-          <div className="flex justify-between items-center mb-2">
-            <Heading monthName={monthName} fullYear={fullYear} />
-            <DateSelector />
-          </div>
-          {(() => {
+  return (
+    <>
+      <div className="container flex flex-col h-screen mx-auto p-3">
+        <div className="flex justify-center">
+          <ViewToggle />
+        </div>
+        <div className="flex justify-between items-center mb-2">
+          <Heading monthName={monthName} fullYear={fullYear} />
+          <DateSelector />
+        </div>
+        {(() => {
+          if (screen.isXl) {
             switch (viewParam) {
               case MONTH_VIEW: {
                 const data = makeMonthGridData(date);
@@ -49,16 +48,11 @@ export const CalendarPage = () => {
                 return <WeekGrid data={data} month={month} />;
               }
             }
-          })()}
-        </div>
-        <Outlet />
-      </>
-    );
-  }
+          }
 
-  return (
-    <>
-      <ListGrid data={makeListGridData(date, viewParam)} />
+          return <ListGrid data={makeListGridData(date, viewParam)} />;
+        })()}
+      </div>
       <Outlet />
     </>
   );
