@@ -3,7 +3,6 @@ import { MONTH_VIEW, WEEK_VIEW } from "../../constants";
 import { useParamsContext } from "../../contexts";
 import { useScreen } from "../../hooks";
 import {
-  getMonthName,
   makeWeekGridData,
   makeMonthGridData,
   makeListGridData,
@@ -21,8 +20,6 @@ export const CalendarPage = () => {
   const { dateParam, viewParam } = useParamsContext();
   const date = fromDateParam(dateParam);
   const month = date.getMonth();
-  const monthName = getMonthName(month);
-  const fullYear = date.getFullYear();
 
   return (
     <>
@@ -31,7 +28,7 @@ export const CalendarPage = () => {
           <ViewToggle />
         </div>
         <div className="flex justify-between items-center mb-2">
-          <Heading monthName={monthName} fullYear={fullYear} />
+          <Heading date={date} />
           <DateSelector />
         </div>
         {(() => {

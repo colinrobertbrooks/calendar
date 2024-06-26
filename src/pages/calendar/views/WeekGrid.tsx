@@ -25,7 +25,7 @@ export const WeekGrid = ({ data, month }: Props) => {
             }`}
           >
             <div className="text-center mb-1">
-              {getDayOfWeekName(date.getDay(), true)}{" "}
+              {getDayOfWeekName(date, true)}{" "}
               <span
                 className={
                   isThisMonth && isToday
