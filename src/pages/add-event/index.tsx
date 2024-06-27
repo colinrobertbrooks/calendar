@@ -4,8 +4,9 @@ import { useEventsContext, useParamsContext } from "../../contexts";
 import { useDialog } from "../../hooks";
 import { toDateParam } from "../../utils";
 
-const inputClassName =
-  "border rounded w-full py-2 px-3 text-gray-700 leading-tight";
+const formGroupClassName = "grid gap-1";
+
+const inputClassName = "border rounded py-2 px-3 text-gray-700 leading-tight";
 
 export const AddEventPage = () => {
   /*
@@ -58,39 +59,45 @@ export const AddEventPage = () => {
       <div className="w-full">
         <h1 className="text-xl">Add Event</h1>
         <div className="grid gap-2 my-3">
-          <label htmlFor="event-date">Date</label>
-          <input
-            aria-label="Select event date and time"
-            className={inputClassName}
-            id="event-date"
-            type="datetime-local"
-            value={eventDate}
-            onChange={(event) => setEventDate(event.target.value)}
-          />
-          <label htmlFor="event-duration">Duration</label>
-          <select
-            className={inputClassName}
-            id="event-duration"
-            value={eventDuration}
-            onChange={(event) => setEventDuration(Number(event.target.value))}
-          >
-            <option value="0" disabled>
-              Select duration...
-            </option>
-            <option value="900">15 minutes</option>
-            <option value="1800">30 minutes</option>
-            <option value="2700">45 minutes</option>
-            <option value="3600">60 minutes</option>
-          </select>
-          <label htmlFor="event-name">Name</label>
-          <input
-            aria-label="Enter event name"
-            className={inputClassName}
-            id="event-name"
-            type="text"
-            value={eventName}
-            onChange={(event) => setEventName(event.target.value)}
-          />
+          <div className={formGroupClassName}>
+            <label htmlFor="event-date">Date</label>
+            <input
+              aria-label="Select event date and time"
+              className={inputClassName}
+              id="event-date"
+              type="datetime-local"
+              value={eventDate}
+              onChange={(event) => setEventDate(event.target.value)}
+            />
+          </div>
+          <div className={formGroupClassName}>
+            <label htmlFor="event-duration">Duration</label>
+            <select
+              className={inputClassName}
+              id="event-duration"
+              value={eventDuration}
+              onChange={(event) => setEventDuration(Number(event.target.value))}
+            >
+              <option value="0" disabled>
+                Select duration...
+              </option>
+              <option value="900">15 minutes</option>
+              <option value="1800">30 minutes</option>
+              <option value="2700">45 minutes</option>
+              <option value="3600">60 minutes</option>
+            </select>
+          </div>
+          <div className={formGroupClassName}>
+            <label htmlFor="event-name">Name</label>
+            <input
+              aria-label="Enter event name"
+              className={inputClassName}
+              id="event-name"
+              type="text"
+              value={eventName}
+              onChange={(event) => setEventName(event.target.value)}
+            />
+          </div>
         </div>
         {errorMessage && <p className="text-red-500 mb-2">{errorMessage}</p>}
         <div className="flex gap-2">
