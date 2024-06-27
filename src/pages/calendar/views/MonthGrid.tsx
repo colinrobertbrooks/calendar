@@ -12,7 +12,7 @@ export const MonthGrid = ({ data, month }: Props) => {
   const today = getToday();
 
   return (
-    <>
+    <div className="pb-3">
       <div className="grid grid-cols-7 gap-2">
         {getEnumKeys(DayOfWeek).map((dayOfWeek) => (
           <div key={dayOfWeek} className="text-right pr-2">
@@ -55,6 +55,6 @@ export const MonthGrid = ({ data, month }: Props) => {
           })}
         </div>
       ))}
-    </>
+    </div>
   );
 };

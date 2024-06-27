@@ -9,7 +9,7 @@ export const ListGrid = ({ data }: Props) => {
   const today = getToday();
 
   return (
-    <div className="grid gap-3">
+    <div className="grid gap-3 pb-3">
       {data.map((date) => {
         const isToday = isSameDate(date, today);
 
