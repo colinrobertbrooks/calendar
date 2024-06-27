@@ -1,4 +1,3 @@
-import { WEEK_VIEW } from "../../../constants";
 import { getDayOfWeekName, getToday, isSameDate } from "../../../utils";
 import AddEventButton from "../AddEventButton";
 import Events from "../Events";

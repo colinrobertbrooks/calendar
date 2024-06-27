@@ -1,4 +1,3 @@
-import { MONTH_VIEW } from "../../../constants";
 import { DayOfWeek } from "../../../types";
 import { getEnumKeys, getToday, isSameDate, makeShort } from "../../../utils";
 import AddEventButton from "../AddEventButton";
