@@ -1,12 +1,18 @@
+import { getMonthName } from "../../utils";
+
 type Props = {
-  monthName: string;
-  fullYear: number;
+  date: Date;
 };
 
-const Heading = ({ monthName, fullYear }: Props) => (
-  <h1 className="text-3xl">
-    <span className="fw-bold">{monthName}</span> {fullYear}
-  </h1>
-);
+const Heading = ({ date }: Props) => {
+  const monthName = getMonthName(date);
+  const fullYear = date.getFullYear();
+
+  return (
+    <h1 className="text-3xl">
+      <span className="fw-bold">{monthName}</span> {fullYear}
+    </h1>
+  );
+};
 
 export default Heading;

@@ -47,7 +47,7 @@ export const MonthGrid = ({ data, month }: Props) => {
                 </div>
                 {isMonth && (
                   <>
-                    <Events date={date} view={MONTH_VIEW} />
+                    <Events date={date} maxEvents={2} />
                     <AddEventButton date={date} />
                   </>
                 )}

@@ -1,8 +1,11 @@
+import { MONTH_VIEW, WEEK_VIEW } from "../constants";
 import {
   getStartOfWeek,
   getEndOfWeek,
   getStartOfMonth,
   getEndOfMonth,
+  getDaysInMonth,
+  getNextDate,
 } from "./dates";
 
 // date can be any date within the week
@@ -12,9 +15,7 @@ export const makeWeekGridData = (date: Date): Date[] => {
 
   for (let i = 0; i < 7; i++) {
     week.push(currentDate);
-    currentDate = new Date(
-      new Date(currentDate).setDate(currentDate.getDate() + 1)
-    );
+    currentDate = getNextDate(currentDate);
   }
 
   return week;
@@ -30,9 +31,7 @@ export const makeMonthGridData = (date: Date): Date[][] => {
 
   while (currentDate.getTime() <= endDate.getTime()) {
     week.push(currentDate);
-    currentDate = new Date(
-      new Date(currentDate).setDate(currentDate.getDate() + 1)
-    );
+    currentDate = getNextDate(currentDate);
 
     if (week.length === 7) {
       month.push(week);
@@ -41,4 +40,26 @@ export const makeMonthGridData = (date: Date): Date[][] => {
   }
 
   return month;
+};
+
+// date can be any date within the week or month
+export const makeListGridData = (date: Date, view: string): Date[] => {
+  switch (view) {
+    case MONTH_VIEW: {
+      const daysInMonth = getDaysInMonth(date);
+      const month: Date[] = [];
+      let currentDate = getStartOfMonth(date);
+
+      for (let i = 0; i < daysInMonth; i++) {
+        month.push(currentDate);
+        currentDate = getNextDate(currentDate);
+      }
+
+      return month;
+    }
+    case WEEK_VIEW:
+    default: {
+      return makeWeekGridData(date);
+    }
+  }
 };
