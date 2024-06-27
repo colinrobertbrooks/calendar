@@ -24,7 +24,7 @@ export const CalendarPage = () => {
   return (
     <>
       <div className="container flex flex-col h-screen mx-auto p-3">
-        <div className="flex justify-center">
+        <div className="flex justify-center mb-3 md:mb-0">
           <ViewToggle />
         </div>
         <div className="flex justify-between items-center mb-2">

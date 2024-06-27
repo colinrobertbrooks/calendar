@@ -10,7 +10,7 @@ const Heading = ({ date }: Props) => {
 
   return (
     <h1 className="text-3xl">
-      <span className="fw-bold">{monthName}</span> {fullYear}
+      <span className="font-bold">{monthName}</span> {fullYear}
     </h1>
   );
 };
