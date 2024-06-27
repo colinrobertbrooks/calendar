@@ -9,7 +9,7 @@ import { CalendarPage, AddEventPage } from "./pages";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/calendar">
       <QueryParamProvider adapter={ReactRouter6Adapter}>
         <ParamsProvider>
           <EventsProvider>
