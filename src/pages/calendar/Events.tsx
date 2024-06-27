@@ -1,24 +1,20 @@
-import { MONTH_VIEW } from "../../constants";
 import { useEventsContext } from "../../contexts";
 import { addSeconds } from "../../utils";
 
 type Props = {
   date: Date;
-  view: string;
+  maxEvents?: number;
 };
 
 const MONTH_VIEW_MAX_EVENTS = 2;
 
-const Events = ({ date, view }: Props) => {
+const Events = ({ date, maxEvents }: Props) => {
   const { getEvents } = useEventsContext();
   const events = getEvents(date);
 
   if (!events.length) return null;
 
-  const isMonthView = view === MONTH_VIEW;
-  const eventsToRender = isMonthView
-    ? events.slice(0, MONTH_VIEW_MAX_EVENTS)
-    : events;
+  const eventsToRender = maxEvents ? events.slice(0, maxEvents) : events;
 
   return (
     <div className="grid gap-1 mb-1 text-xs ">
@@ -35,7 +31,7 @@ const Events = ({ date, view }: Props) => {
           <div>{event.name}</div>
         </div>
       ))}
-      {isMonthView && events.length > MONTH_VIEW_MAX_EVENTS && (
+      {maxEvents && events.length > maxEvents && (
         <div className="text-center text-gray-500">
           and {events.length - MONTH_VIEW_MAX_EVENTS} more...
         </div>

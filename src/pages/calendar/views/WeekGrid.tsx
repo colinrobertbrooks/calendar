@@ -43,7 +43,7 @@ export const WeekGrid = ({ data, month }: Props) => {
             >
               {isThisMonth && (
                 <>
-                  <Events date={date} view={WEEK_VIEW} />
+                  <Events date={date} />
                   <AddEventButton date={date} />
                 </>
               )}
