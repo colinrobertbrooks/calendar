@@ -77,5 +77,12 @@ export const EventsProvider = ({
   );
 };
 
-export const useEventsContext = (): EventsContextValue =>
-  useContext(EventsContext);
+export const useEventsContext = (): EventsContextValue => {
+  const context = useContext(EventsContext);
+  if (!context) {
+    throw new Error(
+      "useEventsContext must be used within a <EventsProvider />"
+    );
+  }
+  return context;
+};

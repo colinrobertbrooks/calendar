@@ -36,5 +36,12 @@ export const ParamsProvider = ({
   );
 };
 
-export const useParamsContext = (): ParamsContextValue =>
-  useContext(ParamsContext);
+export const useParamsContext = (): ParamsContextValue => {
+  const context = useContext(ParamsContext);
+  if (!context) {
+    throw new Error(
+      "useParamsContext must be used within a <ParamsProvider />"
+    );
+  }
+  return context;
+};
