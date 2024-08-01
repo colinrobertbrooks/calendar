@@ -5,6 +5,7 @@ import Events from "../Events";
 type Props = {
   data: Date[];
 };
+
 export const ListGrid = ({ data }: Props) => {
   const today = getToday();
 
