@@ -1,4 +1,4 @@
-import { MONTH_VIEW, WEEK_VIEW } from "../constants";
+import { MONTH_VIEW, WEEK_VIEW } from "../consts";
 import {
   getStartOfWeek,
   getEndOfWeek,

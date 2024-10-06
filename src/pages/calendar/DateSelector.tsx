@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
-import { MONTH_VIEW, WEEK_VIEW } from "../../constants";
+import { MONTH_VIEW, WEEK_VIEW } from "../../consts";
 import {
   getToday,
   getPreviousWeek,

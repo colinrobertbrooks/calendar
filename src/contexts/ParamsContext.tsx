@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react";
 import { useQueryParam, StringParam } from "use-query-params";
-import { WEEK_VIEW } from "../constants";
+import { WEEK_VIEW } from "../consts";
 import { getToday, toDateParam } from "../utils";
 
 type ParamsContextValue = {
